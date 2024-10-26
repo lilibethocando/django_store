@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from store.models import Product, Customer, Collection, OrderItem
+
 
 def say_hello(request):
-    x = 1
-    y = 2
-    return render(request, "hello.html")
+    queryset = OrderItem.objects.values("product_id").distinct()
+
+    return render(request, "hello.html", {"products": queryset})
