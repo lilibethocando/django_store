@@ -7,10 +7,18 @@
 </head>
 <body>
     <h1>Hello World!</h1>
-    <ol>
-        {% for product in products %}
-        <li>{{product}}</li>
+    <ul>
+        {% for order in orders %}
+        <li>
+            Order ID: {{ order.id }} 
+            Customer: {{ order.customer.first_name }}
+            <ul>
+                {% for item in order.orderitem_set.all %}
+                <li>Product: {{ item.product.title }} | Quantity: {{ item.quantity }} | Price: {{ item.unit_price }}</li>
+                {% endfor %}
+            </ul>
+        </li>
         {% endfor %}
-    </ol>
+    </ul>
 </body>
 </html>
